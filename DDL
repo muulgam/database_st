@@ -1,0 +1,49 @@
+CREATE TABLE Customer
+(
+cno int,
+name char,
+passwd char,
+email char,
+PRIMARY KEY (cno)
+) ;
+
+CREATE TABLE Ebook
+(
+    isbn VARCHAR(17),
+    title char,
+    publisher char,
+    year date,
+    cno int,
+    extTimes int,
+    dateRented date,
+    dateDue date,
+    PRIMARY KEY (isbn),
+    FOREIGN KEY (cno) REFERENCES Customer (cno)
+);
+
+
+CREATE TABLE PreviousRental
+(
+isbn VARCHAR(17),
+dateRented DATE,
+dateReturned DATE,
+cno int	,
+primary key (isbn,dateRented),
+FOREIGN KEY (isbn) REFERENCES Ebook (isbn)
+);
+
+CREATE TABLE Reserve
+(isbn VARCHAR(17) ,
+cno INT	,
+dateTime DATE ,
+primary key (isbn,cno),
+FOREIGN KEY (isbn) REFERENCES Ebook (isbn),
+FOREiGN KEY (cno) REFERENCES Customer(cno)
+);
+
+CREATE TABLE Authors
+(isbn VARCHAR(17) ,
+author CHAR ,
+primary key (isbn,author),
+FOREIGN KEY (ISBN) REFERENCES EBOOK(isbn)
+);
